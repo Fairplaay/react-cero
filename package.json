@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "firebase": "^4.12.1",
+    "pure-css": "^1.0.4",
     "purecss": "^1.0.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",

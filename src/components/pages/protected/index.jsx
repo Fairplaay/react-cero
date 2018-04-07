@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Protegida extends Component {
+class dashboardCourses extends Component {
   render () {
     return (
       <article className='Main-container'>
@@ -10,4 +10,4 @@ class Protegida extends Component {
   }
 }
 
-export default Protegida
+export default dashboardCourses
