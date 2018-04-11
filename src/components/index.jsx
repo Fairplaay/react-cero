@@ -14,19 +14,19 @@ import Error404 from './pages/error404'
 import Login from './pages/login'
 import Register from './pages/register'
 
-const PrivateRoute = ({component, authed, rest}) => (
+const PrivateRoute = ({component: Component, authed, rest}) => (
   <Route
     {...rest}
     render={
-      props => authed === true ? <component {...props} /> : <Redirect to={{patname: 'login', state: {from: props.location}}} />
+      props => authed === true ? <Component {...props} /> : <Redirect to={{patname: 'login', state: {from: props.location}}} />
     }
   />
 )
-const PublicRoute = ({component, authed, rest}) => (
+const PublicRoute = ({component: Component, authed, rest}) => (
   <Route
     {...rest}
     render={
-      props => authed === true ? <component {...props} /> : <Redirect to='/cursos' />
+      props => authed === false ? <Component {...props} /> : <Redirect to='/cursos' />
     }
   />
 )
@@ -85,7 +85,7 @@ class App extends Component {
                           className='pure-menu-link'
                           onClick={() => {
                             logout()
-                            this.state.authed = falses
+                            this.state.authed = false
                             this.hadleClick()
                           }} >Logout
                         </Link>
@@ -106,9 +106,10 @@ class App extends Component {
             <main className='main-container'>
               <Switch>
                 <Route path='/' exact component={Home} />
-                <Route authed={this.state.authed} path='/acerca' component={Acerca} />
-                <PublicRoute path='/login' component={Login} />
-                <PublicRoute path='/registro' component={Register} />
+                <Route path='/acerca' component={Acerca} />
+                <PublicRoute authed={this.state.authed} path='/login' component={Login} />
+                <PublicRoute authed={this.state.authed} path='/registro' component={Register} />
+                <PrivateRoute authed={this.state.authed} path='/cursos' component={dashboardCourses} />
                 <Route component={Error404} />
               </Switch>
             </main>
